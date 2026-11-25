@@ -16,6 +16,10 @@ LINE = (
 
 
 def main() -> None:
+    # Gate, mirrored locally: the sealed scorer accepts UTF-8 text of
+    # 1 to 240 characters, not only white space, on a single line.
+    assert 1 <= len(LINE) <= 240, "entry must be 1 to 240 characters"
+    assert "\n" not in LINE and LINE.strip(), "entry must be one non-blank line"
     out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
     os.makedirs(out_dir, exist_ok=True)
     path = os.path.join(out_dir, "entry.txt")
